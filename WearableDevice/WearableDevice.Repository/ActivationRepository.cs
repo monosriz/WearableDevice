@@ -55,7 +55,8 @@ namespace WearableDevice.Repository
             {
                 _context.Activations.Add(new Activation (activationCode,  DateTime.Now )); 
                 _context.SaveChanges();
-              
+                Message = "Activation Code Generated Successfully.Activate for next 60 minute.";
+
             }
             catch (Exception ex)
 

@@ -35,7 +35,7 @@ namespace WearableDevice.TestSubject.WebApi.Controllers
                 if (_reponse.Success == true)
                     return Ok(_reponse);
                 else
-                    return BadRequest(_reponse);
+                    return BadRequest(_reponse.Message);
            
 
         }

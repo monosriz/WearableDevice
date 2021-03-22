@@ -36,7 +36,9 @@ namespace WearableDevice.TestSubject.WebApi
             services.AddDbContext<WearableDeviceDBContext>(options =>
                      options.UseInMemoryDatabase("WearableDevice"));
             services.AddTransient<IActivationRepository, ActivationRepository>();
+            services.AddTransient<IUserProfileRepository, UserProfileRepository>();            
             services.AddTransient<ActivationService>();
+            services.AddTransient<UserProfileService>();
             services.AddTransient<ApplicationWearableDeviceService>();
         }
 

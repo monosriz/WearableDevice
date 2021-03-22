@@ -9,7 +9,7 @@ namespace WearableDevice.Model.Model
     {
         public Activation(int  activationCode, DateTime dateCreated)
         {
-            this.ActivationCode = ActivationCode;
+            this.ActivationCode = activationCode;
             this.DateCreated = dateCreated;
         }
 

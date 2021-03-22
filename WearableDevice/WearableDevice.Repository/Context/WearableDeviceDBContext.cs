@@ -15,6 +15,6 @@ namespace WearableDevice.Repository.Context
         }
 
         public DbSet<Activation> Activations { get; set; }
-
+        public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }
