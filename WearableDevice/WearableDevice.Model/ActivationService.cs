@@ -11,23 +11,44 @@ namespace WearableDevice.Model
     {
 
         private IActivationRepository _activationRepository;
+
+        public bool Success { get; set; }
+        public string Message { get; set; }
         public ActivationService(IActivationRepository activationRepository)
         {
 
             _activationRepository = activationRepository;
 
         }
-        private string CreateActivationCode()
+        public int CreateActivationCode()
         {
-            Random generator = new Random();
-            string result = generator.Next(0, 1000000).ToString("D6");
+            try
+            {
+                Random generator = new Random();
+                string result = generator.Next(0, 1000000).ToString("D6");
 
-            bool existingActivationCode = _activationRepository.GetByActivationCode(int.Parse(result));
+                bool existingActivationCode = _activationRepository.GetByActivationCode(int.Parse(result));
+                if (_activationRepository.Success)
+                {
+                    if (existingActivationCode)
+                        CreateActivationCode();
+                    return int.Parse(result);
 
-            if (existingActivationCode)
-                CreateActivationCode();
-
-            return result;
+                }
+                else
+                {
+                    Success = _activationRepository.Success;
+                    Message = _activationRepository.Message;
+                    return 0;
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                Message = "Failed :- " + ex.Message;
+                Success = false;
+                return 0;
+            }
         }
     }
 }

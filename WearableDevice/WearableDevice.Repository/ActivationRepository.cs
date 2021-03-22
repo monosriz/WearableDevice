@@ -12,7 +12,8 @@ namespace WearableDevice.Repository
     {
 
         private readonly WearableDeviceDBContext _context;
-
+        public bool Success { get; set; }
+        public string Message { get; set; }
         public ActivationRepository(WearableDeviceDBContext context)
         {
             _context = context;
@@ -34,6 +35,8 @@ namespace WearableDevice.Repository
 
             catch (Exception ex)
             {
+                Message = "Failed :- " + ex.Message;
+                Success = false;
                 return false;
                 
             }
