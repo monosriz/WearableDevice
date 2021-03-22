@@ -25,10 +25,10 @@ namespace WearableDevice.AppServices
                
 
                 
-                int strResult = _activationService.CreateActivationCode();
+                int activationCode = _activationService.CreateActivationCode();
                 _reponse.Success = _activationService.Success;
                 _reponse.Message = _activationService.Message;
-
+                _reponse.ActivationCode = activationCode;
 
 
 

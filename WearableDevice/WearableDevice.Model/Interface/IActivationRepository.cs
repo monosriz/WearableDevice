@@ -9,6 +9,8 @@ namespace WearableDevice.Model.Interface
     {
         bool Success { get; set; }
         string Message { get; set; }
-        bool GetByActivationCode(int ActivationCode);
+        bool GetSaveActivationCode(int ActivationCode);
+
+        void SaveActivationCode(int ActivationCode);
     }
 }

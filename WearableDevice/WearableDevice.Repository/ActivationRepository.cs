@@ -19,18 +19,32 @@ namespace WearableDevice.Repository
             _context = context;
         }
 
-        public bool GetByActivationCode(int ActivationCode)
-        {
 
+        public bool GetSaveActivationCode(int activationCode)
+        {
+            Success = true;
+           
             try
             {
-
-                Activation activationItem = _context.Activations.Where(a => a.ActivationCode == ActivationCode).FirstOrDefault();
-                if (activationItem != null)
-                    return true;
+                if (_context.Activations.Count() > 0)
+                {
+                    Activation activationItem = _context.Activations.Where(a => a.ActivationCode == activationCode).FirstOrDefault();
+                    if (activationItem != null)
+                        return true;
+                    else
+                    {
+                        SaveActivationCode(activationCode);
+                        Message = "Activation Code Generated successfully";
+                        return false;
+                    }
+                      
+                }
                 else
+                {
+                    SaveActivationCode(activationCode);
+                    Message = "Activation Code Generated successfully";
                     return false;
-
+                }
             }
 
             catch (Exception ex)
@@ -42,6 +56,27 @@ namespace WearableDevice.Repository
             }
 
             
+        }
+
+        public void SaveActivationCode(int activationCode)
+        {
+
+            try
+            {
+                _context.Activations.Add(new Activation (activationCode,  DateTime.Now )); 
+                _context.SaveChanges();
+              
+            }
+            catch (Exception ex)
+
+
+            {
+                Message = "Failed :- " + ex.Message;
+                Success = false;
+               
+            }
+
+
         }
     }
 }

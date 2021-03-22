@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace WearableDevice.Model.Model
@@ -13,8 +14,8 @@ namespace WearableDevice.Model.Model
         }
 
 
-     
 
+        [Key]
         public int ActivationCode
         { get; set; }
         
