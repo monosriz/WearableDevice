@@ -28,11 +28,14 @@ namespace WearableDevice.Model
                 Random generator = new Random();
                 string result = generator.Next(0, 1000000).ToString("D6");
 
-                bool existingActivationCode = _activationRepository.GetSaveActivationCode(int.Parse(result));
+                Activation existingActivationCode = _activationRepository.GetActivationCode(int.Parse(result));
                 if (_activationRepository.Success)
                 {
-                    if (existingActivationCode)
+
+                    if (existingActivationCode!=null)
                         CreateActivationCode();
+
+                    _activationRepository.SaveActivationCode(int.Parse(result));
                     Success = _activationRepository.Success;
                     Message = _activationRepository.Message;
 

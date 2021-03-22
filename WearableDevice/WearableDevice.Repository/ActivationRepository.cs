@@ -20,7 +20,7 @@ namespace WearableDevice.Repository
         }
 
 
-        public bool GetSaveActivationCode(int activationCode)
+        public Activation GetActivationCode(int activationCode)
         {
             Success = true;
            
@@ -29,29 +29,19 @@ namespace WearableDevice.Repository
                 if (_context.Activations.Count() > 0)
                 {
                     Activation activationItem = _context.Activations.Where(a => a.ActivationCode == activationCode).FirstOrDefault();
-                    if (activationItem != null)
-                        return true;
-                    else
-                    {
-                        SaveActivationCode(activationCode);
-                        Message = "Activation Code Generated successfully";
-                        return false;
-                    }
+                    return activationItem;
                       
                 }
                 else
-                {
-                    SaveActivationCode(activationCode);
-                    Message = "Activation Code Generated successfully";
-                    return false;
-                }
+                     return null;
+            
             }
 
             catch (Exception ex)
             {
                 Message = "Failed :- " + ex.Message;
                 Success = false;
-                return false;
+                return null;
                 
             }
 
@@ -60,7 +50,7 @@ namespace WearableDevice.Repository
 
         public void SaveActivationCode(int activationCode)
         {
-
+            Success = true;
             try
             {
                 _context.Activations.Add(new Activation (activationCode,  DateTime.Now )); 
