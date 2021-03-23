@@ -17,7 +17,11 @@ namespace WearableDevice.AppServices
             _accelerationService = accelerationService;
 
         }
-
+        /// <summary>
+        /// This function used to Save Acceleration data
+        /// </summary>
+        /// <param name="accelerations"></param>
+        /// <returns></returns>
         public ResponseBase SaveAcceleration(List<Acceleration> accelerations)
         {
 

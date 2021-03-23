@@ -18,7 +18,10 @@ namespace WearableDevice.AppServices
             _activationService = activationService;
            
         }
-
+        /// <summary>
+        /// This function used to generate activtion code
+        /// </summary>
+        /// <returns></returns>
         public ActivationCodeResponse GenerateActivationCode()
         {
             

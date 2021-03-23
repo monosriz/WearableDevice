@@ -21,6 +21,12 @@ namespace WearableDevice.AppServices
             _userProfileService = userProfileService;
             _authentication = authentication;
         }
+
+        /// <summary>
+        /// This function used to create a profile
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
         public UserProfileResponse CreateProfile(UserProfile profile)
         {
 
@@ -52,6 +58,10 @@ namespace WearableDevice.AppServices
 
         }
 
+        /// <summary>
+        /// Get all profile
+        /// </summary>
+        /// <returns></returns>
         public AllProfileResponse GetProfiles()
         {
 
@@ -86,7 +96,12 @@ namespace WearableDevice.AppServices
 
         }
 
-
+        /// <summary>
+        /// Validate authorization of user
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="passWord"></param>
+        /// <returns></returns>
         public bool IsAuthoriz(string email, string passWord)
         {
 
