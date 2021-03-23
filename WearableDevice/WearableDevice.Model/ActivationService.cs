@@ -20,6 +20,11 @@ namespace WearableDevice.Model
             _activationRepository = activationRepository;
 
         }
+
+        /// <summary>
+        /// This function used for Creating a new activation code
+        /// </summary>
+        /// <returns></returns>
         public int CreateActivationCode()
         {
             Success = true;

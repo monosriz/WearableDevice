@@ -23,8 +23,11 @@ namespace WearableDevice.Model
         public bool Success { get; set; }
         public string Message { get; set; }
 
-        
 
+        /// <summary>
+        ///This function used to save accelerations based on number of items
+        /// </summary>
+        /// <param name="accelerations"></param>
         public void SaveAcceleration(List<Acceleration> accelerations)
         {
             Success = true;
@@ -35,7 +38,7 @@ namespace WearableDevice.Model
                 if (accelerations != null)
                 {
 
-                    if (accelerations.Count > 1)
+                    if (accelerations.Count > 50)
                     {
 
                         Parallel.ForEach(accelerations, a =>

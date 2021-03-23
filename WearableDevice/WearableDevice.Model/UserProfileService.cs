@@ -23,6 +23,10 @@ namespace WearableDevice.Model
         public bool Success { get; set; }
         public string Message { get; set; }
 
+        /// <summary>
+        /// This finction used fo a create a new user profile(Test Subject)
+        /// </summary>
+        /// <param name="userProfile"></param>
         public void SaveUserProfile(UserProfile userProfile)
         {
             Success = true;
