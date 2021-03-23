@@ -16,7 +16,10 @@ namespace WearableDevice.Repository
         {
             _context = context;
         }
-
+        /// <summary>
+        /// This function used Save Acceleration Object one by one in async mode
+        /// </summary>
+        /// <param name="acceleration"></param>
         public void SaveAccelerationObject(Acceleration acceleration)
         {
             Success = true;
@@ -39,6 +42,10 @@ namespace WearableDevice.Repository
             }
         }
 
+        /// <summary>
+        /// This function used Save mutiple Acceleration object 
+        /// </summary>
+        /// <param name="accelerations"></param>
         public void SaveAccelerationObjectByRange(List<Acceleration> accelerations)
         {
             Success = true;

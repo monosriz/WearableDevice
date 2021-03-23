@@ -19,7 +19,11 @@ namespace WearableDevice.Repository
             _context = context;
         }
 
-
+        /// <summary>
+        /// Get Activation code
+        /// </summary>
+        /// <param name="activationCode"></param>
+        /// <returns></returns>
         public Activation GetActivationCode(int activationCode)
         {
             Success = true;
@@ -47,7 +51,10 @@ namespace WearableDevice.Repository
 
             
         }
-
+        /// <summary>
+        /// Save Activation Code
+        /// </summary>
+        /// <param name="activationCode"></param>
         public void SaveActivationCode(int activationCode)
         {
             Success = true;

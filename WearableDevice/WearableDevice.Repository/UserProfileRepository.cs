@@ -17,7 +17,10 @@ namespace WearableDevice.Repository
         {
             _context = context;
         }
-
+        /// <summary>
+        /// Save User Profile
+        /// </summary>
+        /// <param name="userProfile"></param>
       public void  SaveUserProfile(UserProfile userProfile)
         {
             Success = true;
@@ -40,6 +43,12 @@ namespace WearableDevice.Repository
             }
         }
 
+        /// <summary>
+        /// Get User Profile
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="passWord"></param>
+        /// <returns></returns>
         public UserProfile GetUserProfile(string email, string passWord)
         {
             Success = true;
@@ -65,7 +74,10 @@ namespace WearableDevice.Repository
 
 
         }
-
+        /// <summary>
+        /// Get All user profile
+        /// </summary>
+        /// <returns></returns>
         public List<UserProfile> GetAllUserProfile()
         {
             Success = true;
