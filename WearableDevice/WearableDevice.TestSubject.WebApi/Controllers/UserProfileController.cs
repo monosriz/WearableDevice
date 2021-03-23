@@ -22,6 +22,7 @@ namespace WearableDevice.TestSubject.WebApi.Controllers
             _applicationProfileService = applicationProfileService;
         }
 
+
         /// <summary>
         /// Create Profile (Test Subject)
         /// </summary>
