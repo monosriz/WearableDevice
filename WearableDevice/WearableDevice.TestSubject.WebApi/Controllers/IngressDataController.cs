@@ -9,6 +9,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using WearableDevice.AppServices;
+using WearableDevice.AppServices.Messages;
+using WearableDevice.Model.Model;
 
 namespace WearableDevice.TestSubject.WebApi.Controllers
 {
@@ -17,17 +19,19 @@ namespace WearableDevice.TestSubject.WebApi.Controllers
     public class IngressDataController : ControllerBase
     {
         ApplicationProfileService _applicationProfileService;
-
-        public IngressDataController(ApplicationProfileService applicationProfileService)
+        ApplicationAccelerationService _applicationAccelerationService;
+        string _email;
+        string _password;
+        public IngressDataController(ApplicationProfileService applicationProfileService, ApplicationAccelerationService applicationAccelerationService)
         {
             _applicationProfileService = applicationProfileService;
+            _applicationAccelerationService = applicationAccelerationService;
         }
 
-        [HttpGet()]
+        [HttpPost()]
         [Route("Ingress")]
 
-      
-        public IActionResult Ingress()
+        public IActionResult Ingress([FromBody] List <Acceleration> Acceleration)
 
         {
 
@@ -37,29 +41,28 @@ namespace WearableDevice.TestSubject.WebApi.Controllers
           
 
           
-            try
-            {
-                var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
-                var credentialBytes = Convert.FromBase64String(authHeader.Parameter);
-                var credentials = Encoding.UTF8.GetString(credentialBytes).Split(new[] { ':' }, 2);
-                var email = credentials[0];
-                var password = credentials[1];
-                if (_applicationProfileService.IsAuthoriz(email, password))
+            
+                GetCredential();
+                if (_applicationProfileService.IsAuthoriz(_email, _password))
                 {
+                    ResponseBase _reponse = _applicationAccelerationService.SaveAcceleration(Acceleration);
+                    if (_reponse.Success == true)
+                        return Ok(_reponse);
+                    else
+                        return BadRequest(_reponse.Message);
                 }
                 else
-                    return BadRequest("User is not exist.");
-            }
-            catch
-            {
-                
-            }
+                    return BadRequest("you are not authorize.");
+            
+        }
 
-           
-
-
-            return Ok("Mono");
-
+        private void GetCredential()
+        {
+            var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
+            var credentialBytes = Convert.FromBase64String(authHeader.Parameter);
+            var credentials = Encoding.UTF8.GetString(credentialBytes).Split(new[] { ':' }, 2);
+             _email = credentials[0];
+            _password = credentials[1];
 
         }
 

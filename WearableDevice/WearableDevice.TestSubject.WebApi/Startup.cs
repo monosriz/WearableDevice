@@ -37,12 +37,15 @@ namespace WearableDevice.TestSubject.WebApi
             services.AddDbContext<WearableDeviceDBContext>(options =>
                      options.UseInMemoryDatabase("WearableDevice"));
             services.AddTransient<IActivationRepository, ActivationRepository>();
-            services.AddTransient<IUserProfileRepository, UserProfileRepository>();            
+            services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<IAccelerationRepository, AccelerationRepository>();
             services.AddTransient<ActivationService>();
             services.AddTransient<UserProfileService>();
+            services.AddTransient<AccelerationService>();
             services.AddTransient<Authentication>();
             services.AddTransient<ApplicationActivationService>();
             services.AddTransient<ApplicationProfileService>();
+            services.AddTransient<ApplicationAccelerationService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
