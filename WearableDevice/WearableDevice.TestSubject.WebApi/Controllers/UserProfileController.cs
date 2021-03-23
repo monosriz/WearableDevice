@@ -22,6 +22,11 @@ namespace WearableDevice.TestSubject.WebApi.Controllers
             _applicationProfileService = applicationProfileService;
         }
 
+        /// <summary>
+        /// Create Profile (Test Subject)
+        /// </summary>
+        /// <param name="Profile"></param>
+        /// <returns></returns>
         [HttpPost()]
         [Route("Create")]
         public IActionResult Create([FromBody] UserProfile Profile)

@@ -28,6 +28,12 @@ namespace WearableDevice.TestSubject.WebApi.Controllers
             _applicationAccelerationService = applicationAccelerationService;
         }
 
+
+        /// <summary>
+        /// This function used to process Ingress Data
+        /// </summary>
+        /// <param name="Acceleration"></param>
+        /// <returns></returns>
         [HttpPost()]
         [Route("Ingress")]
 

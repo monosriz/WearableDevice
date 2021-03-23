@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,30 @@ namespace WearableDevice.TestSubject.WebApi
             services.AddTransient<ApplicationActivationService>();
             services.AddTransient<ApplicationProfileService>();
             services.AddTransient<ApplicationAccelerationService>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Dawn Health Backend Developer Case",
+                    Description = "Dawn Health Backend Developer Case.",
+
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Monosriz Dutta",
+                        Email = "monosrizdutta@gmail.com",
+
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under LICX",
+
+                    }
+                });
+
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +87,17 @@ namespace WearableDevice.TestSubject.WebApi
 
             app.UseAuthorization();
 
-           
+            app.UseSwagger(c =>
+            {
+                c.SerializeAsV2 = true;
+            });
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Dawn Health Backend Developer Case");
+            });
 
             app.UseEndpoints(endpoints =>
             {
