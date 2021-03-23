@@ -13,6 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WearableDevice.AppServices;
 using WearableDevice.Model;
+using WearableDevice.Model.Authentication;
 using WearableDevice.Model.Interface;
 using WearableDevice.Repository;
 using WearableDevice.Repository.Context;
@@ -39,7 +40,9 @@ namespace WearableDevice.TestSubject.WebApi
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();            
             services.AddTransient<ActivationService>();
             services.AddTransient<UserProfileService>();
-            services.AddTransient<ApplicationWearableDeviceService>();
+            services.AddTransient<Authentication>();
+            services.AddTransient<ApplicationActivationService>();
+            services.AddTransient<ApplicationProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +58,8 @@ namespace WearableDevice.TestSubject.WebApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+           
 
             app.UseEndpoints(endpoints =>
             {

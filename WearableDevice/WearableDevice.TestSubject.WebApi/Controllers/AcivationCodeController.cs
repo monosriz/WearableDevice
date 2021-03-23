@@ -12,11 +12,11 @@ namespace WearableDevice.TestSubject.WebApi.Controllers
     [ApiController]
     public class AcivationCodeController : ControllerBase
     {
-        ApplicationWearableDeviceService _applicationWearableDeviceService;
+        ApplicationActivationService _applicationActivationService;
 
-        public AcivationCodeController(ApplicationWearableDeviceService applicationWearableDeviceService)
+        public AcivationCodeController(ApplicationActivationService applicationActivationService)
         {
-            _applicationWearableDeviceService = applicationWearableDeviceService;
+            _applicationActivationService = applicationActivationService;
         }
 
        /// <summary>
@@ -31,7 +31,7 @@ namespace WearableDevice.TestSubject.WebApi.Controllers
 
            
 
-                var _reponse = _applicationWearableDeviceService.GenerateActivationCode();
+                var _reponse = _applicationActivationService.GenerateActivationCode();
                 if (_reponse.Success == true)
                     return Ok(_reponse);
                 else

@@ -40,6 +40,32 @@ namespace WearableDevice.Repository
             }
         }
 
+        public UserProfile GetUserProfile(string email, string passWord)
+        {
+            Success = true;
+            
+
+            try
+            {
+                
+                    UserProfile _profile = _context.UserProfiles.Where(u => u.Email == email && u.Password== EncryptPassword.textToEncrypt(passWord)).FirstOrDefault();
+                    return _profile;
+
+                
+
+            }
+
+            catch (Exception ex)
+            {
+                Message = "Failed :- " + ex.Message;
+                Success = false;
+                return null;
+
+            }
+
+
+        }
+
         public List<UserProfile> GetAllUserProfile()
         {
             Success = true;

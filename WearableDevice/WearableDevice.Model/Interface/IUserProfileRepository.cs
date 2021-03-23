@@ -11,7 +11,7 @@ namespace WearableDevice.Model.Interface
         bool Success { get; set; }
         string Message { get; set; }
         List<UserProfile> GetAllUserProfile();
-
+        UserProfile GetUserProfile(string email, string passWord);
         void SaveUserProfile(UserProfile UserProfile);
 
     }

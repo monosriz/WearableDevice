@@ -3,53 +3,24 @@ using System.Collections.Generic;
 using System.Text;
 using WearableDevice.AppServices.Messages;
 using WearableDevice.Model;
+using WearableDevice.Model.Authentication;
 using WearableDevice.Model.Model;
 
 namespace WearableDevice.AppServices
 {
-  public  class ApplicationWearableDeviceService
+    public class ApplicationProfileService
     {
 
-        private ActivationService _activationService;
+       
         private UserProfileService _userProfileService;
+        private Authentication _authentication;
 
-        public ApplicationWearableDeviceService(ActivationService activationService, UserProfileService userProfileService)
+        public ApplicationProfileService( UserProfileService userProfileService, Authentication authentication)
         {
-            _activationService = activationService;
+         
             _userProfileService = userProfileService;
+            _authentication = authentication;
         }
-
-        public ActivationCodeResponse GenerateActivationCode()
-        {
-            
-            var _reponse = new ActivationCodeResponse();
-            try
-            {
-               
-
-                
-                int activationCode = _activationService.CreateActivationCode();
-                _reponse.Success = _activationService.Success;
-                _reponse.Message = _activationService.Message;
-                _reponse.ActivationCode = activationCode;
-
-
-
-
-
-            }
-
-            catch (Exception ex)
-            {
-                _reponse.Success = false;
-                _reponse.Message = "Failed -  " + ex.Message;
-            }
-
-
-            return _reponse;
-
-        }
-
         public UserProfileResponse CreateProfile(UserProfile profile)
         {
 
@@ -59,7 +30,7 @@ namespace WearableDevice.AppServices
 
 
 
-                 _userProfileService.SaveUserProfile(profile);
+                _userProfileService.SaveUserProfile(profile);
                 _reponse.Success = _userProfileService.Success;
                 _reponse.Message = _userProfileService.Message;
                 _reponse.Email = profile.Email;
@@ -84,7 +55,7 @@ namespace WearableDevice.AppServices
         public AllProfileResponse GetProfiles()
         {
 
-            
+
             var _reponse = new AllProfileResponse();
             try
             {
@@ -111,7 +82,20 @@ namespace WearableDevice.AppServices
             }
 
 
-            
+
+
+        }
+
+
+        public bool IsAuthoriz(string email, string passWord)
+        {
+
+
+
+            return _authentication.IsAuthorizedUser(email, passWord);
+
+
+
 
         }
     }

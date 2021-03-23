@@ -15,11 +15,11 @@ namespace WearableDevice.TestSubject.WebApi.Controllers
     public class UserProfileController : ControllerBase
     {
 
-        ApplicationWearableDeviceService _applicationWearableDeviceService;
+        ApplicationProfileService _applicationProfileService;
 
-        public UserProfileController(ApplicationWearableDeviceService applicationWearableDeviceService)
+        public UserProfileController(ApplicationProfileService applicationProfileService)
         {
-            _applicationWearableDeviceService = applicationWearableDeviceService;
+            _applicationProfileService = applicationProfileService;
         }
 
         [HttpPost()]
@@ -31,7 +31,7 @@ namespace WearableDevice.TestSubject.WebApi.Controllers
 
 
 
-            UserProfileResponse _reponse = _applicationWearableDeviceService.CreateProfile(Profile) ;
+            UserProfileResponse _reponse = _applicationProfileService.CreateProfile(Profile) ;
             if (_reponse.Success == true)
                 return Ok(_reponse);
             else
@@ -43,7 +43,7 @@ namespace WearableDevice.TestSubject.WebApi.Controllers
 
         public IActionResult GetAllProfiles()
         {
-            AllProfileResponse _reponse = _applicationWearableDeviceService.GetProfiles();
+            AllProfileResponse _reponse = _applicationProfileService.GetProfiles();
 
             if (_reponse.Success == true)
                 return Ok(_reponse.profiles.Select(u => new { u.Email }));
